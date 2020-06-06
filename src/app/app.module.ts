@@ -1,16 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
+import {TableComponent} from './components/table/table.component';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {DataTableComponent} from './components/data-table/data-table.component';
+import {LayoutModule} from '@angular/cdk/layout';
+import {MaterialModule} from "./material/material.module";
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TableComponent,
+    DataTableComponent,
   ],
   imports: [
-    BrowserModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
