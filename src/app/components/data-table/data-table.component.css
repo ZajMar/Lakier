@@ -1,0 +1,24 @@
+.left-half-width-table {
+  width: 35vw;
+  margin-left: 5vw;
+  margin-right: 0;
+}
+.right-half-width-table {
+  width: 35vw;
+  margin-left: 1vw;
+  margin-right: 0;
+}
+.table-window {
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  box-shadow:0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12)
+}
+.mat-column-select {
+  overflow: initial;
+}

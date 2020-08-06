@@ -1,7 +1,0 @@
-<input type ="text" #localityFilterValue>
-<button (click)="searchForLocality(localityFilterValue.value)">Szukaj lokalizacji</button>
-<div *ngFor="let locality of localities">
-  Name : {{ locality.name }}, Id : {{ locality.id }}, ParentId : {{ locality.parentId }}
-</div>
-
-
