@@ -28,7 +28,7 @@ import static pl.lacquer.lacquerapp.mapper.LacquerGroupMapper.mapTo;
  */
 @RestController
 @RequestMapping(LacquerGroupResource.LACQUER_GROUP_PATH)
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(maxAge = 3600)
 public class LacquerGroupResource {
 
     public static final String LACQUER_GROUP_PATH = "lacquer-group";
