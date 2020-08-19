@@ -1,0 +1,39 @@
+<div class="middle-components-position">
+
+
+  <mat-form-field class="sort-by-combobox" appearance="fill">
+    <mat-label>Sortuj po:</mat-label>
+    <mat-select
+      [(value)]="sortBy"
+      (selectionChange)="sortByChanged()">
+      <mat-option *ngFor="let sort of sortByOptions" [value]="sort.value">
+        {{sort.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="sort-order-combobox" appearance="fill">
+    <mat-label>Kolejność sortowania:</mat-label>
+    <mat-select
+      [(value)]="sortOrder"
+      (selectionChange)="sortOrderChanged()"
+    >
+      <mat-option *ngFor="let order of sortOrderOptions" [value]="order.value">
+        {{order.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="sort-order-combobox" appearance="fill">
+    <mat-label>Opcje duplikatów:</mat-label>
+    <mat-select
+      [(value)]="allowDuplicates"
+      (selectionChange)="overwriteChanged()"
+    >
+      <mat-option *ngFor="let overwrite of overwriteOptions" [value]="overwrite.value">
+        {{overwrite.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<button class="add-to-group-btn" mat-raised-button color="primary" (click)="addToGroup()">Dodaj do grupy</button>

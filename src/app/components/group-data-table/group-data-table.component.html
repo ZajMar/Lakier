@@ -1,1 +1,76 @@
-<p>group-data-table works!</p>
+<div class="basic-container table-window">
+
+  <mat-form-field class="group-name-form">
+    <label>
+      <input matInput placeholder="Stwórz grupę" [(ngModel)]="groupName">
+    </label>
+  </mat-form-field>
+
+  <button class="create-group-btn" mat-raised-button color="primary" (click)="saveGroup()" [disabled]="groupNameNotPresent()">Zapisz
+  </button>
+
+  <mat-select class="group-select-form" placeholder="Otwórz grupę" [(ngModel)]="selectedGroupId" (selectionChange)="refreshGroup()">
+    <mat-option *ngFor="let group of availableGroups.value" [value]="group.groupId" >
+      {{group.groupName}}
+    </mat-option>
+  </mat-select>
+
+  <button class="print-btn" mat-raised-button color="primary" (click)="print()">Drukuj Kody</button>
+
+  <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8"
+                 cdkDropList
+                 [cdkDropListData]="dataSource"
+                 (cdkDropListDropped)="dropTable($event)">
+
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef>Numer</mat-header-cell>
+      <mat-cell *matCellDef="let lacquer">{{lacquer.position}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+      <mat-header-cell *matHeaderCellDef>Kod</mat-header-cell>
+      <mat-cell *matCellDef="let lacquer">{{lacquer.code}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Nazwa</mat-header-cell>
+      <mat-cell *matCellDef="let lacquer">{{lacquer.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="brand">
+      <mat-header-cell *matHeaderCellDef>Marka</mat-header-cell>
+      <mat-cell *matCellDef="let lacquer">{{lacquer.brand}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="popularity">
+      <mat-header-cell *matHeaderCellDef>Popularność</mat-header-cell>
+      <mat-cell *matCellDef="let lacquer">{{lacquer.popularity}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="remove">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button (click)="removeAll()" matTooltip="Wyczyść">
+          <mat-icon>clear_all</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let item; let i = index;">
+        <button mat-icon-button (click)="removeAt(i)" matTooltip="Usuń lakier z tej grupy">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row class="row-header" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row class="row-shadow" *matRowDef="let row; columns: displayedColumns;"
+                  cdkDrag [cdkDragData]="row">
+
+    </mat-row>
+  </mat-table>
+</div>
+
+<div hidden id="print-section">
+  <ng-container *ngFor='let row of dataSource.data' class="group">
+    <p style="font-size:60px;"> {{row.code}}</p>
+  </ng-container>
+</div>
+

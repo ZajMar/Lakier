@@ -1,0 +1,9 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 5fr 5fr;
+  grid-gap: 1px;
+}
+.whole-table-view {
+  box-shadow: inset 1px 14px 99px -14px rgb(206, 220, 255);
+  height: 100%;
+}

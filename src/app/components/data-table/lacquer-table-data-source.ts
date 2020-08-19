@@ -1,12 +1,16 @@
 import {DataSource} from '@angular/cdk/collections';
-import {catchError, finalize} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {LacquerClientService} from "../../services/lacquer-client.service";
+import {LacquerClientService} from "../../services/lacquer/lacquer-client.service";
 import {EventEmitter, Output} from "@angular/core";
 
 export interface LacquerDataTableItem {
   name: string;
+  code: string;
   id: string;
+  position: number;
+  popularity: string;
+  brand: string;
 }
 
 /**
@@ -19,9 +23,6 @@ export class LacquerTableDataSource implements DataSource<LacquerDataTableItem> 
   public lacquerSubject = new BehaviorSubject<LacquerDataTableItem[]>([]);
   public totalNumber;
 
-  private loadingSubject = new BehaviorSubject<boolean>(false);
-  public loading$ = this.loadingSubject.asObservable();
-
   @Output() reloadData: EventEmitter<any> = new EventEmitter();
 
   constructor(private lacquerClientService: LacquerClientService) {
@@ -31,21 +32,23 @@ export class LacquerTableDataSource implements DataSource<LacquerDataTableItem> 
     return this.lacquerSubject.asObservable();
   }
 
-  public loadLacquer(nameFilter = '', codeFilter = '', sort = '', pageIndex = 0, pageSize = 10) {
-    this.loadingSubject.next(true);
+  public loadLacquer(nameFilter = '', codeFilter = '', brandFilter = '', popularityFilter = '', sort = '', pageIndex = 0, pageSize = 10) {
     this.lacquerSubject.next([]);
     let sortType = LacquerTableDataSource.mapSortType(sort);
-    this.lacquerClientService.getLacquer(nameFilter, codeFilter, pageIndex, pageSize, sortType)
+    this.lacquerClientService.getLacquer(nameFilter, codeFilter, brandFilter, popularityFilter, pageIndex, pageSize, sortType)
       .pipe(
-        catchError(() => of([])),
-        finalize(() => this.loadingSubject.next(false))
+        catchError(() => of([]))
       )
       .subscribe(rootObject => {
           let tableObjects = [];
           if ("results" in rootObject && "totalRecords" in rootObject) {
             tableObjects = rootObject.results == null ? [] : rootObject.results.map(lacquer => ({
               id: lacquer.lacquerId,
-              name: lacquer.lacquerName
+              code: lacquer.lacquerCode,
+              name: lacquer.lacquerName,
+              position: lacquer.position,
+              popularity: lacquer.lacquerPopularity,
+              brand: lacquer.lacquerBrand
             }));
             this.totalNumber = rootObject.totalRecords;
           }
@@ -66,6 +69,5 @@ export class LacquerTableDataSource implements DataSource<LacquerDataTableItem> 
 
   disconnect() {
     this.lacquerSubject.complete();
-    this.loadingSubject.complete();
   }
 }

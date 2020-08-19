@@ -1,10 +1,17 @@
 <div class="basic-container table-window">
-    <mat-form-field color="primary" class="left-half-width-table">
-      <input matInput placeholder="Search lacquer by code" #lacquerCodeInput>
-    </mat-form-field>
-  <mat-form-field color="primary" class="right-half-width-table">
-    <input matInput placeholder="Search lacquer by name" #lacquerNameInput>
+  <mat-form-field color="primary" class="code-filter">
+    <input matInput placeholder="Szukaj po kodzie" #lacquerCodeInput>
   </mat-form-field>
+  <mat-form-field color="primary" class="name-filter">
+    <input matInput placeholder="Szukaj po nazwie" #lacquerNameInput>
+  </mat-form-field>
+  <mat-form-field color="primary" class="brand-filter">
+    <input matInput placeholder="Szukaj po marce" #lacquerBrandInput>
+  </mat-form-field>
+  <mat-form-field color="primary" class="popularity-filter">
+    <input matInput placeholder="Szukaj po popularności" #lacquerPopularityInput>
+  </mat-form-field>
+
   <mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
 
     <!-- Checkbox Column -->
@@ -25,29 +32,31 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
-      <mat-cell *matCellDef="let lacquer">{{lacquer.id}}</mat-cell>
+    <ng-container matColumnDef="code">
+      <mat-header-cell *matHeaderCellDef>Kod</mat-header-cell>
+      <mat-cell *matCellDef="let lacquer">{{lacquer.code}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-      <mat-cell class="name"
-                *matCellDef="let lacquer">{{lacquer.name}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</mat-header-cell>
+      <mat-cell class="name" *matCellDef="let lacquer">{{lacquer.name}}</mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns">
+    <ng-container matColumnDef="brand">
+      <mat-header-cell *matHeaderCellDef>Marka</mat-header-cell>
+      <mat-cell *matCellDef="let lacquer">{{lacquer.brand}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="popularity">
+      <mat-header-cell *matHeaderCellDef>Popularność</mat-header-cell>
+      <mat-cell *matCellDef="let lacquer">{{lacquer.popularity}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row class="row-header" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row class="row-shadow" *matRowDef="let row; columns: displayedColumns">
     </mat-row>
 
   </mat-table>
 
-  <!--  <div class="spinner-container" *ngIf="dataSource.loading$ | async">-->
-  <!--    <mat-progress-spinner-->
-  <!--      color="primary"-->
-  <!--      mode="indeterminate">-->
-  <!--    </mat-progress-spinner>-->
-  <!--  </div>-->
-
-  <mat-paginator [length]="dataSource?.totalNumber" [pageSize]="10" [pageSizeOptions]="[5, 10, 15, 20, 50]"></mat-paginator>
+  <mat-paginator class="mat-paginator-sticky" [length]="dataSource?.totalNumber" [pageSize]="10" [pageSizeOptions]="[5, 10, 15, 20, 50]"></mat-paginator>
 </div>

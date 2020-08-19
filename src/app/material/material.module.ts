@@ -33,6 +33,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import {CdkStepperModule} from "@angular/cdk/stepper";
+import {CdkTableModule} from "@angular/cdk/table";
+import {CdkTreeModule} from "@angular/cdk/tree";
 
 @NgModule({
   exports: [
@@ -70,7 +73,10 @@ import { MatTreeModule } from '@angular/material/tree';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule
+    MatTreeModule,
+    CdkStepperModule,
+    CdkTableModule,
+    CdkTreeModule
   ],
   imports: [
     MatAutocompleteModule,

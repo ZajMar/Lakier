@@ -1,11 +1,12 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {LacquerDataTableItem, LacquerTableDataSource} from './lacquer-table-data-source';
-import {LacquerClientService} from "../../services/lacquer-client.service";
+import {LacquerClientService} from "../../services/lacquer/lacquer-client.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {debounceTime, distinctUntilChanged, tap} from "rxjs/operators";
 import {MatSort} from "@angular/material/sort";
 import {fromEvent} from "rxjs";
 import {SelectionModel} from '@angular/cdk/collections';
+import {FormsService} from "../../services/selected-lacquer/forms.service";
 
 @Component({
   selector: 'data-table',
@@ -14,15 +15,18 @@ import {SelectionModel} from '@angular/cdk/collections';
 })
 export class DataTableComponent implements AfterViewInit, OnInit {
   dataSource: LacquerTableDataSource;
-  displayedColumns = ['select', 'id', 'name'];
+  displayedColumns = ['select', 'code', 'name', 'brand', 'popularity'];
   selection = new SelectionModel<LacquerDataTableItem>(true, []);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('lacquerNameInput') lacquerNameInput: ElementRef;
   @ViewChild('lacquerCodeInput') lacquerCodeInput: ElementRef;
+  @ViewChild('lacquerBrandInput') lacquerBrandInput: ElementRef;
+  @ViewChild('lacquerPopularityInput') lacquerPopularityInput: ElementRef;
 
-  constructor(private lacquerClientService: LacquerClientService) {
+  constructor(private lacquerClientService: LacquerClientService,
+              private selectedLacquerService: FormsService) {
   }
 
   ngOnInit() {
@@ -47,12 +51,18 @@ export class DataTableComponent implements AfterViewInit, OnInit {
     this.dataSource.reloadData.subscribe(() => {
       this.selection.clear();
     });
+
+    this.selectedLacquerService.clickedAddToGroup.subscribe(() => {
+      this.selectedLacquerService.updateSelectedRows(this.selection.selected);
+    });
   }
 
   private initializeFilterHandler() {
     const lacquerNameInputFromEvent = fromEvent(this.lacquerNameInput.nativeElement, 'keyup');
     const lacquerCodeInputFromEvent = fromEvent(this.lacquerCodeInput.nativeElement, 'keyup');
-    const events = [lacquerNameInputFromEvent, lacquerCodeInputFromEvent];
+    const lacquerBrandInputFromEvent = fromEvent(this.lacquerBrandInput.nativeElement, 'keyup');
+    const lacquerPopularityInputFromEvent = fromEvent(this.lacquerPopularityInput.nativeElement, 'keyup');
+    const events = [lacquerNameInputFromEvent, lacquerCodeInputFromEvent, lacquerBrandInputFromEvent, lacquerPopularityInputFromEvent];
     events.forEach((singleFromEvent) =>
       singleFromEvent
       .pipe(
@@ -71,6 +81,8 @@ export class DataTableComponent implements AfterViewInit, OnInit {
     this.dataSource.loadLacquer(
       this.lacquerNameInput.nativeElement.value,
       this.lacquerCodeInput.nativeElement.value,
+      this.lacquerBrandInput.nativeElement.value,
+      this.lacquerPopularityInput.nativeElement.value,
       this.sort.direction,
       this.paginator.pageIndex,
       this.paginator.pageSize

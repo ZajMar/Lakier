@@ -1,24 +1,54 @@
-.left-half-width-table {
-  width: 35vw;
-  margin-left: 5vw;
+.code-filter {
+  width: 15%;
+  margin-left: 5%;
   margin-right: 0;
 }
-.right-half-width-table {
-  width: 35vw;
+mat-cell:nth-child(1),
+mat-header-cell:nth-child(1) {
+  flex: 0 0 5%;
+  justify-content:flex-start;
+}
+.name-filter {
+  width: 28%;
   margin-left: 1vw;
   margin-right: 0;
 }
+mat-cell:nth-child(2),
+mat-header-cell:nth-child(2) {
+  flex: 0 0 15%;
+}
+.brand-filter {
+  width: 18%;
+  margin-left: 1vw;
+  margin-right: 0;
+}
+mat-cell:nth-child(3),
+mat-header-cell:nth-child(3) {
+  flex: 0 0 30%;
+}
+.popularity-filter {
+  width: 20%;
+  margin-left: 1vw;
+  margin-right: 0;
+}
+mat-cell:nth-child(4),
+mat-header-cell:nth-child(4) {
+  flex: 0 0 25%;
+}
 .table-window {
-  margin-left: 10vw;
-  margin-right: 10vw;
+  box-shadow: inset 1px 14px 99px -14px rgb(139, 129, 179), 1px 14px 99px -14px rgb(139, 129, 179);
+  margin-left: 1vw;
+  width: 48vw;
 }
-.spinner-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fafafa;
-  box-shadow:0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12)
+.mat-paginator-sticky {
+  top: 734px;
+  position: sticky;
+  z-index: 10;
+  box-shadow: inset 1px 14px 99px -14px rgb(90, 100, 255);
 }
-.mat-column-select {
-  overflow: initial;
+.row-header {
+  box-shadow: inset 1px 14px 99px -14px rgb(90, 100, 255);
+}
+.row-shadow {
+  box-shadow: inset 1px 14px 99px -14px rgb(131, 157, 255);
 }

@@ -1,0 +1,107 @@
+.create-group-field {
+  left: 15px;
+}
+.table-window {
+  margin-right: 1vw;
+  width: 49vw;
+  overflow: auto;
+  box-shadow: inset 1px 14px 99px -14px rgb(139, 129, 179), 1px 14px 99px -14px rgb(139, 129, 179);
+  border-style: hidden;
+}
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px #1b0e80;
+  border-radius: 0px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cec3ff;
+  box-shadow: inset 0 0 10px #1b0e80;
+  border-radius: 1px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #8b81b3;
+  box-shadow: inset 0 0 10px #1b0e80;
+}
+.row-header {
+  box-shadow: inset 1px 14px 99px -14px rgb(90, 100, 255);
+}
+.row-shadow {
+  box-shadow: inset 1px 14px 99px -14px rgb(131, 157, 255);
+}
+/* Drag n drop */
+.example-box.cdk-drag-disabled {
+  background: #ccc;
+  cursor: default;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .mat-row:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.group-name-form {
+  margin-left: 1vw;
+  width: 15vw;
+}
+.group-select-form {
+  margin-left: 1vw;
+  width: 15vw;
+}
+.create-group-btn {
+  margin-left: 1vw;
+  width: 5vw;
+}
+.print-btn {
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+mat-cell:nth-child(1),
+mat-header-cell:nth-child(1) {
+  flex: 0 0 10%;
+  justify-content:flex-start;
+}
+mat-cell:nth-child(2),
+mat-header-cell:nth-child(2) {
+  flex: 0 0 10%;
+  justify-content:flex-start;
+}
+mat-cell:nth-child(3),
+mat-header-cell:nth-child(3) {
+  flex: 0 0 30%;
+  justify-content:flex-start;
+}
+mat-cell:nth-child(4),
+mat-header-cell:nth-child(4) {
+  flex: 0 0 25%;
+  justify-content:flex-start;
+}
+mat-cell:nth-child(5),
+mat-header-cell:nth-child(5) {
+  flex: 0 0 15%;
+  justify-content:flex-start;
+}
+
