@@ -1,4 +1,4 @@
-package pl.lacquer.lacquerapp.dao;
+package pl.lacquer.lacquerapp.dao.lacquer;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,10 +31,10 @@ public class H2DbLacquerClient implements LacquerClient {
     }
 
     @Override
-    public QueryResult<LacquerDTO> getLacquers(String lacquerName, String lacquerCode, int page, int pageSize, String sort) {
+    public QueryResult<LacquerDTO> getLacquers(String lacquerName, String lacquerCode, String lacquerBrand, String lacquerPopularity, int page, int pageSize, String sort) {
         Pageable pageOptions = buildPageOptions(page, pageSize, sort);
-        List<LacquerDTO> sortedAndPagedLacquers = extractLacquers(lacquerName, lacquerCode, pageOptions);
-        return new QueryResult<>(sortedAndPagedLacquers, lacquerRepositoryClient.countAll(lacquerName, lacquerCode), page);
+        List<LacquerDTO> sortedAndPagedLacquers = extractLacquers(lacquerName, lacquerCode, lacquerBrand, lacquerPopularity, pageOptions);
+        return new QueryResult<>(sortedAndPagedLacquers, lacquerRepositoryClient.countAll(lacquerName, lacquerCode, lacquerBrand, lacquerPopularity), page);
     }
 
     private Pageable buildPageOptions(int page, int pageSize, String sort) {
@@ -49,8 +49,8 @@ public class H2DbLacquerClient implements LacquerClient {
         return Sort.by(Direction.ASC, sort);
     }
 
-    private List<LacquerDTO> extractLacquers(String lacquerName, String lacquerCode, Pageable pageOptions) {
-        return lacquerRepositoryClient.findWithSortingAndPaging(lacquerName, lacquerCode, pageOptions).stream()
+    private List<LacquerDTO> extractLacquers(String lacquerName, String lacquerCode, String lacquerBrand, String lacquerPopularity, Pageable pageOptions) {
+        return lacquerRepositoryClient.findWithSortingAndPaging(lacquerName, lacquerCode, lacquerBrand, lacquerPopularity, pageOptions).stream()
                    .map(LacquerMapper::toLacquerDTO)
                    .collect(Collectors.toList());
     }

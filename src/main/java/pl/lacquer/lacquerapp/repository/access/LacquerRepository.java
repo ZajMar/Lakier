@@ -15,8 +15,7 @@ import pl.lacquer.lacquerapp.repository.model.Lacquer;
 @Repository
 interface LacquerRepository extends PagingAndSortingRepository<Lacquer, UUID> {
 
-    List<Lacquer> findAllByLacquerNameIsContainingIgnoringCaseAndLacquerIdIsContainingIgnoringCase(String lacquerName, String lacquerCode, Pageable pageable);
+    List<Lacquer> findAllByLacquerNameIsContainingIgnoreCaseAndLacquerCodeIsContainingIgnoreCaseAndLacquerBrandIsContainingIgnoreCaseAndLacquerPopularityIsContainingIgnoreCase(String lacquerName, String lacquerCode, String lacquerBrand, String lacquerPopularity, Pageable pageable);
 
-    long countAllByLacquerNameContainingIgnoringCaseAndLacquerIdIsContainingIgnoringCase(String lacquerName, String lacquerCode);
-
+    long countAllByLacquerNameIsContainingIgnoreCaseAndLacquerCodeIsContainingIgnoreCaseAndLacquerBrandIsContainingIgnoreCaseAndLacquerPopularityIsContainingIgnoreCase(String lacquerName, String lacquerCode, String lacquerBrand, String lacquerPopularity);
 }

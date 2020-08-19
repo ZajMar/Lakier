@@ -10,4 +10,7 @@ public class CommonQueryUtils {
 
     public static final String PAGE_QUERY = "page";
     public static final String PAGE_SIZE_QUERY = "page-size";
+
+    public static final String ASC = "asc";
+    public static final String DESC = "desc";
 }

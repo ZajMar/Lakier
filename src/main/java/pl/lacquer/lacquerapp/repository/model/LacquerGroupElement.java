@@ -7,40 +7,42 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Created by Marcin Zając on 2020-06-04
+ * Created by Marcin Zając on 2020-08-09
  */
 @Getter
 @Setter
 @Builder
 @Entity
-@Table(name = "LACQUER")
+@Table(name = "LACQUER_GROUP_ELEMENT")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Lacquer implements Serializable {
+public class LacquerGroupElement implements Serializable {
 
     @Id
     @GeneratedValue
     @Column(name = "INTERNAL_ID")
-    private UUID internalId;
+    private UUID id;
 
-    @Column(name = "LACQUER_CODE")
-    private String lacquerCode;
+    @ManyToOne
+    @JoinColumn(name = "GROUP_ID")
+    private LacquerGroup lacquerGroup;
 
-    @Column(name = "LACQUER_NAME")
-    private String lacquerName;
+    @ManyToOne
+    @JoinColumn(name = "LACQUER_ID")
+    private Lacquer lacquer;
 
-    @Column(name = "LACQUER_POPULARITY")
-    private String lacquerPopularity;
-
-    @Column(name = "LACQUER_BRAND")
-    private String lacquerBrand;
+    @Column(name="POSITION")
+    private int position;
 }
