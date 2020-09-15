@@ -25,8 +25,8 @@ export class AddButtonComponent implements OnInit {
   sortByOptions: ComboboxStringOptions[] = [
     {value: 'lacquerName', viewValue: 'Nazwa'},
     {value: 'lacquerCode', viewValue: 'Kod'},
-    {value: 'lacquerBrand', viewValue: 'Popularność'},
-    {value: 'lacquerPopularity', viewValue: 'Marka'}
+    {value: 'lacquerBrand', viewValue: 'Marka'},
+    {value: 'lacquerPopularity', viewValue: 'Popularność'}
   //  {value: 'none', viewValue: 'Brak'}
   ];
 

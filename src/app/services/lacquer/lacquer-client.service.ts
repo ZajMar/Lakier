@@ -8,11 +8,13 @@ import {LacquerDataTableItem} from "../../components/data-table/lacquer-table-da
 })
 export class LacquerClientService {
 
+  public ENV = "https://mighty-taiga-00242.herokuapp.com/";
+
   constructor(private httpClient: HttpClient) {
   }
 
   public getLacquer(nameFilter: string, codeFilter: string, brandFilter: string, popularityFilter: string, page: number, pageSize: number, sort: string): Observable<LacquerRootObject> {
-    return this.httpClient.get<LacquerRootObject>('http://localhost:8080/lacquer', {
+    return this.httpClient.get<LacquerRootObject>(this.ENV + 'lacquer', {
       params: new HttpParams()
         .set('name', nameFilter)
         .set('code', codeFilter)
@@ -27,7 +29,7 @@ export class LacquerClientService {
   public getSortedLacquers(lacquerDataTableItems: LacquerDataTableItem[], sortBy: string, sortOrder: string, allowDuplicates: boolean): Observable<Lacquer[]> {
     let ids = lacquerDataTableItems.map(item => item.id);
     let request = {ids: ids, sortBy: sortBy, sortOrder: sortOrder, allowDuplicates: allowDuplicates} as SortLacquersRequest;
-    return this.httpClient.post<Lacquer[]>('http://localhost:8080/lacquer-group/sort-lacquers-in-group', request, {});
+    return this.httpClient.post<Lacquer[]>(this.ENV + 'lacquer-group/sort-lacquers-in-group', request, {});
   }
 
   public saveGroup(lacquerDataTableItems: LacquerDataTableItem[], sortBy: string, sortOrder: string, allowDuplicates: boolean, groupName: string): Observable<string> {
@@ -42,15 +44,15 @@ export class LacquerClientService {
       sortOrder: sortOrder,
       allowDuplicates: allowDuplicates
     } as LacquerGroup;
-    return this.httpClient.post<string>('http://localhost:8080/lacquer-group/create-group', lacquerGroup, {});
+    return this.httpClient.post<string>(this.ENV + 'lacquer-group/create-group', lacquerGroup, {});
   }
 
   public getAllGroups() {
-    return this.httpClient.get<LacquerGroup[]>('http://localhost:8080/lacquer-group/all-groups', {});
+    return this.httpClient.get<LacquerGroup[]>(this.ENV + 'lacquer-group/all-groups', {});
   }
 
   public getLacquerGroup(lacquerGroupId: string): Observable<LacquerGroup> {
-    return this.httpClient.get<LacquerGroup>('http://localhost:8080/lacquer-group/get-group', {
+    return this.httpClient.get<LacquerGroup>(this.ENV + 'lacquer-group/get-group', {
       params: new HttpParams()
         .set('lacquerGroupId', lacquerGroupId)
     });
